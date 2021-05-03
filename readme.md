@@ -22,8 +22,7 @@ Underpin, it should work as-expected.
 
 ## Example
 
-A very basic example could look something like this. Note that your custom Post Type will not display unless registered in Javascript
-as well.
+A very basic example could look something like this.
 
 ```php
 // Register custom Post Type
