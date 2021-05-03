@@ -4,13 +4,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Add this loader.
-add_action( 'underpin/before_setup', function ( $class ) {
-	if ( 'Underpin\Underpin' === $class ) {
+add_action( 'underpin/before_setup', function ( $instance ) {
 		require_once( plugin_dir_path( __FILE__ ) . 'Custom_Post_Type.php' );
 		require_once( plugin_dir_path( __FILE__ ) . 'Custom_Post_Type_Instance.php' );
-		Underpin\underpin()->loaders()->add( 'custom_post_types', [
+		$instance->loaders()->add( 'custom_post_types', [
 			'instance' => 'Underpin_Custom_Post_Types\Abstracts\Custom_Post_Type',
 			'default'  => 'Underpin_Custom_Post_Types\Factories\Custom_Post_Type_Instance'
 		] );
-	}
 } );
