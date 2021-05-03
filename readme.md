@@ -1,4 +1,4 @@
-# Underpin Block Loader
+# Underpin Custom Post Type Loader
 
 Loader That assists with adding custom Post Types to a WordPress website.
 
