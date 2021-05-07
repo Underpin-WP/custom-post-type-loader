@@ -49,3 +49,23 @@ is queried, should you decide to extend the class.
 ```php
 underpin()->custom_post_types()->get( 'post_type' )->query();
 ```
+
+## Editing Posts
+
+Like querying, Custom Post Type instances includes a method called `save` which serves as a wrapper for `wp_insert_post`
+and `wp_update_post`. It also includes notice-logging so you can track what happens on a request.
+
+This encapsulates save actions for this post type in a set of methods, and gives you a place to override exactly _how_
+this post type is saved, should you decide to extend the class.
+
+```php
+underpin()->custom_post_types()->save( [/* see wp_insert_post */] );
+```
+
+## Deleting Posts
+
+This works in the same way as `save` and `query`. It includes logging, and provides a way to encapsulate the action.
+
+```php
+underpin()->custom_post_types()->delete( $id, $force_delete );
+```

@@ -9,6 +9,10 @@
       "email": "a@alexstandiford.com"
     }
   ],
+  "require": {
+    "underpin/logger-loader": "1.*",
+
+  },
   "autoload": {
     "files": [
       "custom-post-types.php"
