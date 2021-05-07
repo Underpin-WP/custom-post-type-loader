@@ -38,3 +38,14 @@ Alternatively, you can extend `Custom_Post_Type` and reference the extended clas
 ```php
 underpin()->custom_post_types()->add('custom-post-type-key','Namespace\To\Class');
 ```
+
+## Querying
+
+A Custom Post Type instance includes a method, called `query`, which serves as a wrapper for `new WP_Query`.
+
+This encapsulates queries for this post type in a method, and gives you a place to override exactly _how_ this post type
+is queried, should you decide to extend the class.
+
+```php
+underpin()->custom_post_types()->get( 'post_type' )->query();
+```

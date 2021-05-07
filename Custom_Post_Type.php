@@ -71,12 +71,28 @@ abstract class Custom_Post_Type {
 			);
 		}
 	}
+
 	public function __get( $key ) {
 		if ( isset( $this->$key ) ) {
 			return $this->$key;
 		} else {
-			return new WP_error( 'batch_task_param_not_set', 'The batch task key ' . $key . ' could not be found.' );
+			return new \WP_Error( 'custom_post_type_param_not_set', 'The custom post type key ' . $key . ' could not be found.' );
 		}
+	}
+
+	/**
+	 * Run a WP_Query against this post type.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array $args Query arguments to provide.
+	 *
+	 * @return \WP_Query The WP Query object.
+	 */
+	public function query( $args = [] ) {
+		$args['post_type'] = $this->type;
+
+		return new \WP_Query( $args );
 	}
 
 }
