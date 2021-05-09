@@ -51,6 +51,21 @@ abstract class Custom_Post_Type {
 	 */
 	public function do_actions() {
 		add_action( 'init', [ $this, 'register' ] );
+		add_filter( 'rest_' . $this->type . '_query', [ $this, 'rest_query' ] );
+	}
+
+	/**
+	 * Updates REST Requests to use prepared query arguments for REST Requests.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array            $args
+	 * @param \WP_REST_Request $request
+	 *
+	 * @return array
+	 */
+	public function rest_query( $args, \WP_REST_Request $request ) {
+		return $this->prepare_query_args( $args );
 	}
 
 	/**
@@ -91,9 +106,22 @@ abstract class Custom_Post_Type {
 	 * @return \WP_Query The WP Query object.
 	 */
 	public function query( $args = [] ) {
+		return new \WP_Query( $this->prepare_query_args( $args ) );
+	}
+
+	/**
+	 * Prepares query args specific to this post type.
+	 *
+	 * @since 1.0.o
+	 *
+	 * @param array $args Post args to process.
+	 *
+	 * @return array Processed query arguments.
+	 */
+	public function prepare_query_args( array $args ) {
 		$args['post_type'] = $this->type;
 
-		return new \WP_Query( $args );
+		return $args;
 	}
 
 	/**
