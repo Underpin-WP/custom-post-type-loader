@@ -51,7 +51,7 @@ abstract class Custom_Post_Type {
 	 */
 	public function do_actions() {
 		add_action( 'init', [ $this, 'register' ] );
-		add_filter( 'rest_' . $this->type . '_query', [ $this, 'rest_query' ] );
+		add_filter( 'rest_' . $this->type . '_query', [ $this, 'rest_query' ], 10, 2 );
 	}
 
 	/**
