@@ -7,11 +7,11 @@
  */
 
 
-namespace Underpin_Custom_Post_Types\Factories;
+namespace Underpin\Custom_Post_Types\Factories;
 
 
 use Underpin\Traits\Instance_Setter;
-use Underpin_Custom_Post_Types\Abstracts\Custom_Post_Type;
+use Underpin\Custom_Post_Types\Abstracts\Custom_Post_Type;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;

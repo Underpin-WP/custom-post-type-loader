@@ -7,11 +7,12 @@
  */
 
 
-namespace Underpin_Custom_Post_Types\Abstracts;
+namespace Underpin\Custom_Post_Types\Abstracts;
 
 
+use Underpin\Loaders\Logger;
 use Underpin\Traits\Feature_Extension;
-use function Underpin\underpin;
+
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -77,9 +78,9 @@ abstract class Custom_Post_Type {
 		$registered = register_post_type( $this->type, $this->args );
 
 		if ( is_wp_error( $registered ) ) {
-			underpin()->logger()->log_wp_error( 'error', $registered );
+			Logger::log_wp_error( 'error', $registered );
 		} else {
-			underpin()->logger()->log(
+			Logger::log(
 				'notice',
 				'custom_post_type_registered',
 				'The custom post type ' . $this->type . ' has been registered.',
@@ -185,9 +186,9 @@ abstract class Custom_Post_Type {
 		$saved = isset( $args['ID'] ) ? $this->_update( $args ) : $this->_insert( $args );
 
 		if ( is_wp_error( $saved ) ) {
-			underpin()->logger()->log_wp_error( $saved );
+			Logger::log_wp_error( $saved );
 		} else {
-			underpin()->logger()->log(
+			Logger::log(
 				'notice',
 				$this->type . '_saved',
 				'A ' . $this->type . ' was saved',
@@ -213,7 +214,7 @@ abstract class Custom_Post_Type {
 		$post_type = get_post_type( $id );
 
 		if ( false === $post_type ) {
-			return underpin()->logger()->log_as_error(
+			return Logger::log_as_error(
 				'warning',
 				'post_delete_post_does_not_exist',
 				'A post was not deleted because it does not exist.',
@@ -222,7 +223,7 @@ abstract class Custom_Post_Type {
 		}
 
 		if ( $post_type !== $this->type ) {
-			return underpin()->logger()->log_as_error(
+			return Logger::log_as_error(
 				'error',
 				'post_delete_wrong_post_type',
 				'A post was not deleted because it is the wrong post type.',
@@ -237,7 +238,7 @@ abstract class Custom_Post_Type {
 
 			// If the post returns something falsy, it's most-likely an error.
 			if ( false === $deleted || null === $deleted ) {
-				return underpin()->logger()->log_as_error(
+				return Logger::log_as_error(
 					'error',
 					'post_delete_failed',
 					'A post was not deleted.',
@@ -245,7 +246,7 @@ abstract class Custom_Post_Type {
 				);
 				// If we got something else, it's probably not an error.
 			} else {
-				return underpin()->logger()->log_as_error(
+				return Logger::log_as_error(
 					'warning',
 					'post_delete_cancelled',
 					'A post was not deleted, but this may have been intentional.',
