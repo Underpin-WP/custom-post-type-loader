@@ -10,11 +10,12 @@
     }
   ],
   "require": {
-    "underpin/logger-loader": "^2.0"
+    "underpin/underpin": "^2.0"
   },
   "autoload": {
+    "psr-4": {"Underpin\\Custom_Post_Types\\":  "lib/"},
     "files": [
-      "custom-post-types.php"
+      "bootstrap.php"
     ]
   }
 }
